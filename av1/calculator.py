@@ -29,4 +29,4 @@ if __name__ == "__main__":
     print("rezultat:", rez)
     # print(f"rezultat: {rez}")
     # print("rezultat: {} {}".format(rez, rez))
-    # print("rezultat: % .2f %.2f" % (rez, rez))
+    # print("rezultat: %.2f %.2f" % (rez, rez))
