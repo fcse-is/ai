@@ -45,6 +45,6 @@
 
 
 
-Дополнителни ресурси:
+## Дополнителни ресурси:
 https://www.datacamp.com/community/tutorials/python-list-comprehension
 https://www.geeksforgeeks.org/nested-list-comprehensions-in-python/
