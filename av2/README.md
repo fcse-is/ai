@@ -42,3 +42,9 @@
 
 Излез:
 [[2, 4, 6, 8], [2, 4, 6, 8], [3, 6, 9, 12], [3, 6, 9, 12]]
+
+
+
+Дополнителни ресурси:
+https://www.datacamp.com/community/tutorials/python-list-comprehension
+https://www.geeksforgeeks.org/nested-list-comprehensions-in-python/
