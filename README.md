@@ -5,6 +5,7 @@
 ### Поставки 
 - Инсталација на Python3: https://www.python.org/downloads/ 
 - PyCharm околина за развој: https://www.jetbrains.com/pycharm/ 
+- PyCharm debugging туторијал: https://www.youtube.com/watch?v=sRGpvbhOhQs
 
 ## Интересни линкови:
 - [Multi-Agent Hide and Seek](https://www.youtube.com/watch?v=kopoLzvh5jY)
