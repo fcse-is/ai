@@ -1,7 +1,6 @@
 import sys
 
-from utils import Node, FIFOQueue, Stack, PriorityQueue
-
+from .utils import Node, FIFOQueue, Stack, PriorityQueue, Problem
 
 """
 Неинформирано пребарување во рамки на дрво.
@@ -13,8 +12,11 @@ def tree_search(problem, fringe):
     """ Пребарувај низ следбениците на даден проблем за да најдеш цел.
 
     :param problem: даден проблем
+    :type problem: Problem
     :param fringe:  празна редица (queue)
-    :return: Node
+    :type fringe: FIFOQueue or Stack or PriorityQueue
+    :return: Node or None
+    :rtype: Node
     """
     fringe.append(Node(problem.initial))
     while fringe:
@@ -30,7 +32,9 @@ def breadth_first_tree_search(problem):
     """Експандирај го прво најплиткиот јазол во пребарувачкото дрво.
 
     :param problem: даден проблем
-    :return: Node
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
     """
     return tree_search(problem, FIFOQueue())
 
@@ -38,8 +42,10 @@ def breadth_first_tree_search(problem):
 def depth_first_tree_search(problem):
     """Експандирај го прво најдлабокиот јазол во пребарувачкото дрво.
 
-    :param problem:даден проблем
-    :return: Node
+    :param problem: даден проблем
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
     """
     return tree_search(problem, Stack())
 
@@ -56,8 +62,11 @@ def graph_search(problem, fringe):
      Ако до дадена состојба стигнат два пата, употреби го најдобриот пат.
 
     :param problem: даден проблем
-    :param fringe: празна редица (queue)
-    :return: Node
+    :type problem: Problem
+    :param fringe:  празна редица (queue)
+    :type fringe: FIFOQueue or Stack or PriorityQueue
+    :return: Node or None
+    :rtype: Node
     """
     closed = set()
     fringe.append(Node(problem.initial))
@@ -75,7 +84,9 @@ def breadth_first_graph_search(problem):
     """Експандирај го прво најплиткиот јазол во пребарувачкиот граф.
 
     :param problem: даден проблем
-    :return: Node
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
     """
     return graph_search(problem, FIFOQueue())
 
@@ -84,12 +95,25 @@ def depth_first_graph_search(problem):
     """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф.
 
     :param problem: даден проблем
-    :return: Node
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
     """
     return graph_search(problem, Stack())
 
 
 def depth_limited_search(problem, limit=50):
+    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф
+    со ограничена длабочина.
+
+    :param problem: даден проблем
+    :type problem: Problem
+    :param limit: лимит за длабочината
+    :type limit: int
+    :return: Node or None
+    :rtype: Node
+    """
+
     def recursive_dls(node, problem, limit):
         """Помошна функција за depth limited"""
         cutoff_occurred = False
@@ -112,6 +136,14 @@ def depth_limited_search(problem, limit=50):
 
 
 def iterative_deepening_search(problem):
+    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф
+    со ограничена длабочина, со итеративно зголемување на длабочината.
+
+    :param problem: даден проблем
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
+    """
     for depth in range(sys.maxsize):
         result = depth_limited_search(problem, depth)
         if result is not 'cutoff':
@@ -119,5 +151,11 @@ def iterative_deepening_search(problem):
 
 
 def uniform_cost_search(problem):
-    """Експандирај го прво јазолот со најниска цена во пребарувачкиот граф."""
+    """Експандирај го прво јазолот со најниска цена во пребарувачкиот граф.
+
+    :param problem: даден проблем
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
+    """
     return graph_search(problem, PriorityQueue(min, lambda a: a.path_cost))

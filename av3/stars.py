@@ -1,5 +1,5 @@
-from utils import Problem
-from uninformed_search import *
+from searching_framework.utils import Problem
+from searching_framework.uninformed_search import *
 
 
 def k1(x, y, b_x, b_y):  # up up left
@@ -171,7 +171,6 @@ class Stars(Problem):
             successors['B4'] = (knight_x, knight_y, new_x, new_y,
                                 tuple([s for s in stars_positions if s[0] != new_x or s[1] != new_y]))
 
-
         return successors
 
     def actions(self, state):
@@ -216,4 +215,3 @@ if __name__ == '__main__':
 
     result = breadth_first_graph_search(stars)
     print(result.solution())
-

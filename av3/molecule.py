@@ -1,5 +1,5 @@
-from utils import Problem
-from uninformed_search import *
+from searching_framework.utils import Problem
+from searching_framework.uninformed_search import *
 
 
 def move_right(x1, y1, x2, y2, x3, y3, obstacles):
@@ -146,4 +146,3 @@ if __name__ == '__main__':
 
     result = breadth_first_graph_search(molecule)
     print(result.solution())
-
