@@ -426,6 +426,20 @@ def depth_limited_search(problem, limit=50):
     return recursive_dls(Node(problem.initial), problem, limit)
 
 
+def iterative_deepening_search(problem):
+    """Експандирај го прво најдлабокиот јазол во пребарувачкиот граф
+    со ограничена длабочина, со итеративно зголемување на длабочината.
+    :param problem: даден проблем
+    :type problem: Problem
+    :return: Node or None
+    :rtype: Node
+    """
+    for depth in range(sys.maxsize):
+        result = depth_limited_search(problem, depth)
+        if result is not 'cutoff':
+            return result
+
+
 def uniform_cost_search(problem):
     """Експандирај го прво јазолот со најниска цена во пребарувачкиот граф.
     :param problem: даден проблем
@@ -446,14 +460,13 @@ class Solitaire(Problem):
     def successor(self, state):
 
         successors = {}
-        points = list(state)
 
-        for p in points:
+        for p in state:
             x = p[0]
             y = p[1]
 
             if x - 2 >= 0 and y + 2 < self.N:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x - 1, y + 1) in temp_list and (x - 2, y + 2) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x - 1, y + 1))
@@ -461,7 +474,7 @@ class Solitaire(Problem):
                     successors['Gore Levo: (x=' + str(x) + ',y=' + str(y) + ')'] = tuple(temp_list)
 
             if x + 2 < self.N and y + 2 < self.N:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x + 1, y + 1) in temp_list and (x + 2, y + 2) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x + 1, y + 1))
@@ -469,7 +482,7 @@ class Solitaire(Problem):
                     successors['Gore Desno: (x=' + str(x) + ',y=' + str(y) + ')'] = tuple(temp_list)
 
             if x - 2 >= 0 and y - 2 >= 0:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x - 1, y - 1) in temp_list and (x - 2, y - 2) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x - 1, y - 1))
@@ -477,7 +490,7 @@ class Solitaire(Problem):
                     successors['Dolu Levo: (x=' + str(x) + ',y=' + str(y) + ')'] = tuple(temp_list)
 
             if x + 2 < self.N and y - 2 >= 0:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x + 1, y - 1) in temp_list and (x + 2, y - 2) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x + 1, y - 1))
@@ -485,7 +498,7 @@ class Solitaire(Problem):
                     successors['Dolu Desno: (x=' + str(x) + ',y=' + str(y) + ')'] = tuple(temp_list)
 
             if x - 2 >= 0:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x - 1, y) in temp_list and (x - 2, y) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x - 1, y))
@@ -493,7 +506,7 @@ class Solitaire(Problem):
                     successors['Levo: (x=' + str(x) + ',y=' + str(y) + ')'] = tuple(temp_list)
 
             if x + 2 < self.N:
-                temp_list = points[:]
+                temp_list = list(state)
                 if (x + 1, y) in temp_list and (x + 2, y) not in temp_list:
                     temp_list.remove(p)
                     temp_list.remove((x + 1, y))
@@ -511,7 +524,7 @@ class Solitaire(Problem):
 
     def goal_test(self, state):
         if len(state) == 1:
-            if state[0][0] == N//2 and state[0][0] == N-1:
+            if state[0][0] == N//2 and state[0][1] == N-1:
                 return True
 
         return False
@@ -535,3 +548,7 @@ if __name__ == "__main__":
 
     for _ in range(0, number_of_obstacles):
         obstacles.append(tuple(map(int, input().split(","))))
+
+    solitaire = Solitaire(points,N,obstacles)
+    result = breadth_first_graph_search(solitaire)
+    print(result.solution())
