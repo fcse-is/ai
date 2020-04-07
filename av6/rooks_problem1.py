@@ -3,10 +3,7 @@ from constraint import *
 if __name__ == '__main__':
     problem = Problem(RecursiveBacktrackingSolver())
 
-    domain = []
-    for i in range(0, 8):
-        for j in range(0, 8):
-            domain.append((i, j))
+    domain = [(i,j) for i in range(0,8) for j in range(0,8)]
 
     rooks = range(1, 9)
 
