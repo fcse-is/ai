@@ -26,10 +26,10 @@
 
 Не мора функциските ограничувања да ги поставувате со lambda expression. Како што и претходно објаснивме во првите аудиториски вежби, lambda expression е анонимна функција па може да си решавате и со функција.
 
-problem.addConstraint(lambda r1, r2: r1[0] != r2[0] and r1[1] != r2[1], (rook1, rook2))
+```problem.addConstraint(lambda r1, r2: r1[0] != r2[0] and r1[1] != r2[1], (rook1, rook2))```
 
 може да се замени со
 
-problem.addConstraint(rooks_attacking_constraint, (rook1, rook2))
+```problem.addConstraint(rooks_attacking_constraint, (rook1, rook2))```
 
-каде rooks_attacking_constraint ви е функција дефинирана претходно (види пример rooks_problem_without_lambda.py)
+каде rooks_attacking_constraint ви е функција дефинирана претходно (види пример ***rooks_problem_without_lambda.py***)
